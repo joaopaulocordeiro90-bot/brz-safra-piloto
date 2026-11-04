@@ -8,7 +8,7 @@
 'use strict';
 const D=window.__CEN_DATA__,C=window.C,B=window.__BAL_OFFICIAL__;
 if(!D||!C||!B)return;
-const STORE='brz_safra_cen_v1';
+const STORE='brz_safra_test_cen_v1';
 const en=()=>document.documentElement.lang==='en';
 const T=(pt,e)=>en()?e:pt;
 const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
