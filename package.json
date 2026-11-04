@@ -1,0 +1,12 @@
+{
+  "name": "brz-safras-cloudflare",
+  "private": true,
+  "version": "1.0.0",
+  "description": "BRZ SAFRA s33 - publicacao estatica protegida pelo Cloudflare Access",
+  "scripts": {
+    "build": "node scripts/build-cloudflare.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.68.0"
+  }
+}
