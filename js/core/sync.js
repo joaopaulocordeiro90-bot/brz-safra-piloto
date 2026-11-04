@@ -166,6 +166,20 @@ function start(){
   if(dirty.size){flush();}else{refresh();}
   window.addEventListener("focus",()=>{if(document.hidden)return;if(dirty.size&&!stopped)flush();else refresh();});
 }
-window.BRZSYNC={login,refresh,flush,status,version:"live-candidate-1"};
+async function history(){
+  if(!token())throw new Error("Faça login para consultar o histórico.");
+  return await request("history");
+}
+async function backupSnapshot(){
+  if(!token()||dirty.size||working||stopped)throw new Error("Há sincronização ou edição local pendente. Resolva antes de gerar o backup.");
+  return await request("read");
+}
+async function restoreRevision(section,revision,expected_revision){
+  if(!token()||dirty.size||working||stopped)throw new Error("Há sincronização ou edição local pendente. Não é seguro restaurar.");
+  const ans=await request("restore",{section,revision,expected_revision});
+  await refresh();
+  return ans;
+}
+window.BRZSYNC={login,refresh,flush,status,history,backupSnapshot,restoreRevision,version:"live-history-2"};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(start,0),{once:true});else setTimeout(start,0);
 })();
