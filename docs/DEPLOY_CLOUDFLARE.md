@@ -35,3 +35,7 @@ O build gera `dist/` contendo **somente** `index.html`, `assets/`, `css/`, `data
 Alterações na branch `main` poderão disparar um novo build e deploy automaticamente. O processo apenas copia o conteúdo modular vigente, sem alterar seus bytes.
 
 Em caso de falha, verifique **Workers e Pages → brz-safras → Implantações/Builds**. Não desligue o Access para corrigir problemas de carregamento.
+
+## Acionamento da primeira compilação (04/11/2026)
+
+Este commit documental foi realizado para iniciar a compilação automática já conectada ao Worker `brz-safras`. Nenhum arquivo operacional (`index.html`, `css/`, `js/`, `data/`, `assets/`) foi alterado. A proteção do Cloudflare Access deve permanecer ativa para todo o tráfego.
