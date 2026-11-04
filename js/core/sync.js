@@ -180,6 +180,23 @@ async function restoreRevision(section,revision,expected_revision){
   await refresh();
   return ans;
 }
-window.BRZSYNC={login,refresh,flush,status,history,backupSnapshot,restoreRevision,version:"live-history-2"};
+async function importSnapshot(sectionsInput){
+  if(!token()||dirty.size||working||stopped)throw new Error("Há sincronização ou edição local pendente. Não é seguro importar.");
+  if(!sectionsInput||typeof sectionsInput!=="object"||Array.isArray(sectionsInput)||
+      Object.keys(sectionsInput).length!==sections.length||
+      !sections.every(s=>sectionsInput[s]&&typeof sectionsInput[s]==="object"&&!Array.isArray(sectionsInput[s])))
+    throw new Error("Arquivo não contém as três áreas esperadas.");
+  const remote=await request("read");
+  const expected={};
+  for(const section of sections){
+    const rev=Number(remote.sections?.[section]?.revision);
+    if(!Number.isSafeInteger(rev)||rev<1)throw new Error("Revisão remota inválida em "+section);
+    expected[section]=rev;
+  }
+  const ans=await request("import",{sections:sectionsInput,expected});
+  await refresh();
+  return ans;
+}
+window.BRZSYNC={login,refresh,flush,status,history,backupSnapshot,restoreRevision,importSnapshot,version:"live-history-3"};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(start,0),{once:true});else setTimeout(start,0);
 })();
