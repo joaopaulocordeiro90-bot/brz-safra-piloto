@@ -125,55 +125,95 @@
 
 <style id="brz-gate-style">
 html:not(.brz-access-granted) body > :not(#brz-access-gate){visibility:hidden!important}
-#brz-access-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:20px;background:#edf2f6;font-family:Arial,sans-serif;color:#19354d}
+#brz-access-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:100px 18px 65px;background:#F3F6F9;font-family:'Arial Nova Cond','Arial Narrow',Arial,sans-serif;color:#1E3448;box-sizing:border-box}
+#brz-access-gate,#brz-access-gate *{box-sizing:border-box}
 #brz-access-gate[hidden]{display:none!important}
-#brz-access-gate .brz-gate-card{width:min(100%,390px);background:white;border:1px solid #dce5eb;border-radius:15px;padding:34px 30px;box-shadow:0 12px 35px rgba(16,41,67,.12)}
-#brz-access-gate .brz-gate-title{font-size:23px;font-weight:700;margin:0 0 6px}
-#brz-access-gate .brz-gate-caption{font-size:13px;color:#526b7d;margin:0 0 24px}
-#brz-access-gate label{display:block;font-size:13px;font-weight:600;margin:0 0 8px}
-#brz-access-gate input{box-sizing:border-box;width:100%;padding:12px 14px;font-size:16px;border:1px solid #bacbd6;border-radius:7px;outline-offset:2px;background:white;color:#132f43}
-#brz-access-gate button{width:100%;margin-top:16px;padding:13px;background:#153b5b;color:white;border:0;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer}
-#brz-access-gate button:hover{background:#0d9488}
-#brz-gate-error{min-height:20px;margin:8px 0 0;color:#b42318;font-size:13px}
+#brz-access-gate .brz-gate-header{position:absolute;inset:0 0 auto;height:66px;padding:0 clamp(18px,4vw,58px);background:white;border-bottom:1px solid #DCE5ED;display:flex;align-items:center;justify-content:space-between;gap:14px}
+#brz-access-gate .brz-gate-brand{display:flex;align-items:center;gap:12px}
+#brz-access-gate .brz-gate-logo{font:900 30px/1 Arial,sans-serif;color:#1A3A5C;letter-spacing:-2px}
+#brz-access-gate .brz-gate-separator{height:30px;width:1px;background:#CAD6E0}
+#brz-access-gate .brz-gate-product{font-size:12px;color:#1A3A5C;font-weight:800}
+#brz-access-gate .brz-gate-product small{display:block;color:#64748B;font-size:11px;font-weight:400;margin-top:3px}
+#brz-access-gate .brz-gate-brandtag{color:#64748B;font-size:11px;font-weight:700;letter-spacing:1px}
+#brz-access-gate .brz-gate-card{background:white;width:min(100%,440px);border:1px solid #DCE5ED;border-radius:10px;box-shadow:0 12px 34px rgba(18,41,63,.08);overflow:hidden}
+#brz-access-gate .brz-gate-accent{height:4px;background:linear-gradient(90deg,#1A3A5C 0 70%,#0D9488 70% 92%,#B5963E 92%)}
+#brz-access-gate .brz-gate-inner{padding:36px clamp(24px,5vw,40px) 30px}
+#brz-access-gate .brz-gate-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#0D9488;font-weight:800;margin:0 0 11px}
+#brz-access-gate .brz-gate-title{font-size:24px;line-height:1.2;color:#12293F;letter-spacing:-.45px;margin:0 0 10px}
+#brz-access-gate .brz-gate-caption{font-size:12.5px;line-height:1.5;color:#526778;margin:0 0 28px}
+#brz-access-gate label{display:block;font-size:12px;font-weight:800;color:#12293F;margin:0 0 9px}
+#brz-access-gate .brz-gate-input{position:relative}
+#brz-access-gate input{display:block;width:100%;height:45px;border:1px solid #C9D6DF;border-radius:6px;padding:0 70px 0 13px;font:600 16px Arial,sans-serif;color:#12293F;letter-spacing:1px;background:white;outline:0}
+#brz-access-gate input:focus{border-color:#0D9488;box-shadow:0 0 0 3px rgba(13,148,136,.11)}
+#brz-access-gate .brz-gate-toggle{position:absolute;top:1px;right:1px;height:43px;width:69px;padding:0;border:none;background:none;color:#566D7F;font:700 11px Arial,sans-serif;cursor:pointer}
+#brz-access-gate .brz-gate-submit{width:100%;height:44px;margin-top:18px;border:0;border-radius:6px;background:#1A3A5C;color:white;font:800 12px Arial,sans-serif;cursor:pointer}
+#brz-access-gate .brz-gate-submit:hover{background:#24547C}
+#brz-access-gate .brz-gate-submit:disabled{opacity:.6;cursor:wait}
+#brz-gate-error{min-height:16px;margin:9px 0 0;color:#B42318;font-size:12px}
+#brz-access-gate .brz-gate-footer{border-top:1px solid #E8EEF2;padding:16px 25px;background:#FBFCFD;text-align:center;color:#64748B;font-size:10px}
+@media(max-width:520px){#brz-access-gate{padding-top:110px;align-items:flex-start}#brz-access-gate .brz-gate-header{height:61px;padding:0 16px}#brz-access-gate .brz-gate-brandtag{display:none}}
 </style>
 <script id="brz-gate-init">
-try{if(sessionStorage.getItem('brz_safra_gate_open')==='yes')document.documentElement.classList.add('brz-access-granted')}catch(e){}
+try{
+ const t=sessionStorage.getItem('brz_safra_admin_session_v1');
+ if(t && /^[0-9a-f]{64}$/.test(t) && sessionStorage.getItem('brz_safra_gate_open')==='yes')document.documentElement.classList.add('brz-access-granted');
+}catch(e){}
 </script>
 </head>
 <body data-typo='{"sizes":{"0":14,"1":13,"2":8,"3":10,"4":10,"5":9},"foot":false}'>
 <div id="brz-access-gate" role="dialog" aria-modal="true" aria-labelledby="brz-gate-heading">
-  <div class="brz-gate-card">
-    <h1 class="brz-gate-title" id="brz-gate-heading">BRZ · Safras Brasil</h1>
-    <p class="brz-gate-caption">Informe a senha para abrir o painel.</p>
-    <form id="brz-gate-form">
-      <label for="brz-gate-password">Senha de acesso</label>
-      <input id="brz-gate-password" name="password" type="password" inputmode="numeric" autocomplete="off" required autofocus>
-      <p id="brz-gate-error" aria-live="polite"></p>
-      <button type="submit">Entrar</button>
-    </form>
+  <div class="brz-gate-header">
+    <div class="brz-gate-brand"><span class="brz-gate-logo">BRZ</span><span class="brz-gate-separator"></span><span class="brz-gate-product">Safras Brasil<small>Progresso de Safra · Conab</small></span></div>
+    <span class="brz-gate-brandtag">AGRINVEST INTELIGÊNCIA</span>
   </div>
+  <section class="brz-gate-card">
+    <div class="brz-gate-accent"></div>
+    <div class="brz-gate-inner">
+      <p class="brz-gate-eyebrow">Ambiente BRZ · Safras</p>
+      <h1 class="brz-gate-title" id="brz-gate-heading">Acesso ao painel</h1>
+      <p class="brz-gate-caption">Informe sua senha para acessar o BRZ Safras Brasil.</p>
+      <form id="brz-gate-form" autocomplete="off">
+        <label for="brz-gate-password">Senha de acesso</label>
+        <div class="brz-gate-input">
+          <input id="brz-gate-password" name="password" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Digite sua senha" required autofocus>
+          <button type="button" class="brz-gate-toggle" id="brz-gate-show" aria-label="Exibir senha">Mostrar</button>
+        </div>
+        <p id="brz-gate-error" aria-live="polite"></p>
+        <button class="brz-gate-submit" type="submit">Entrar no BRZ Safras</button>
+      </form>
+    </div>
+    <div class="brz-gate-footer">AGRINVEST COMMODITIES · BRASIL</div>
+  </section>
 </div>
+<script src="js/core/sync.js"></script>
 <script id="brz-gate-handler">
 (function(){
-'use strict';
-var gate=document.getElementById('brz-access-gate');
-if(document.documentElement.classList.contains('brz-access-granted')){gate.hidden=true;return;}
-var form=document.getElementById('brz-gate-form'), field=document.getElementById('brz-gate-password'), error=document.getElementById('brz-gate-error');
-var digest='409a0bc78b15efab11d17d3052d220cb35ec30a5592fef34511cb98f26cb7ca0';
-form.addEventListener('submit',async function(e){
- e.preventDefault();
- error.textContent='';
- if(!window.crypto||!crypto.subtle){error.textContent='Abra o painel por HTTPS (GitHub Pages).';return;}
- try{
-   var bytes=new TextEncoder().encode(field.value);
-   var raw=await crypto.subtle.digest('SHA-256',bytes);
-   var value=Array.from(new Uint8Array(raw),b=>b.toString(16).padStart(2,'0')).join('');
-   if(value!==digest){error.textContent='Senha incorreta.';field.value='';field.focus();return;}
-   try{sessionStorage.setItem('brz_safra_gate_open','yes');}catch(e){}
-   document.documentElement.classList.add('brz-access-granted');
-   gate.hidden=true;
- }catch(e){error.textContent='Não foi possível validar. Tente novamente.';}
-});
+ 'use strict';
+ const gate=document.getElementById('brz-access-gate');
+ if(document.documentElement.classList.contains('brz-access-granted')){gate.hidden=true;return;}
+ const form=document.getElementById('brz-gate-form');
+ const field=document.getElementById('brz-gate-password');
+ const error=document.getElementById('brz-gate-error');
+ const show=document.getElementById('brz-gate-show');
+ const submit=form.querySelector('[type="submit"]');
+ show.addEventListener('click',()=>{
+   const visible=field.type==='text';
+   field.type=visible?'password':'text';
+   show.textContent=visible?'Mostrar':'Ocultar';
+   show.setAttribute('aria-label',visible?'Exibir senha':'Ocultar senha');
+   field.focus();
+ });
+ form.addEventListener('submit',async e=>{
+   e.preventDefault();
+   error.textContent='';submit.disabled=true;
+   try{
+     if(!window.BRZSYNC)throw new Error('Conexão de acesso indisponível. Atualize a página.');
+     await window.BRZSYNC.login(field.value);
+   }catch(err){
+     error.textContent=err.message||'Não foi possível validar a senha.';
+     field.value='';field.focus();
+   }finally{submit.disabled=false;}
+ });
 })();
 </script>
 
