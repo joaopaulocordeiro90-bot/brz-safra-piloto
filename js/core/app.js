@@ -807,6 +807,7 @@ function baseSync(){
   const o=s[BF.oper]=s[BF.oper]||{};
   o[BF.uf]=rows.sort((a,b)=>a[0]<b[0]?-1:1);
   window._dataDirty=true;
+  try{localStorage.setItem('brz_safra_dataC',JSON.stringify(C));}catch(e){toast('Não foi possível salvar a base local.');return;}
   rerenderAll();if(window.BRZIMEA)window.BRZIMEA.render();if(window.BRZIND)window.BRZIND.render();toast('Base sincronizada ✓');
 }
 function baseAdd(){
@@ -853,7 +854,9 @@ function estSync(){
       }
     });
   });
-  window._dataDirty=true;rerenderAll();toast('Estimativas aplicadas ✓');
+  window._dataDirty=true;
+  try{localStorage.setItem('brz_safra_dataC',JSON.stringify(C));}catch(e){toast('Não foi possível salvar as estimativas locais.');return;}
+  rerenderAll();toast('Estimativas aplicadas ✓');
 }
 
 /* ── estado (gabarito e43: HTML congelado + versão de dados + paleta) ── */
