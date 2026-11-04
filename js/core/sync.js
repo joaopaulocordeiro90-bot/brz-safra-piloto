@@ -5,14 +5,18 @@
 const ENDPOINT="https://jxvleqbphljxboleeaot.supabase.co/functions/v1/brz-safra-gateway";
 const TOKEN="brz_safra_admin_session_v1";
 const REVISIONS="brz_safra_remote_revisions_v1";
+const DRAFTS="brz_safra_pending_sections_v1";
+const SHADOW="brz_safra_last_synced_values_v1";
 const STORE={
   safra_base:"brz_safra_dataC",
   agrinvest_balance:"brz_safra_agrinvest_bal_v1",
   scenario_assumptions:"brz_safra_cen_v1"
 };
 const sections=Object.keys(STORE);
-let revisions={},dirty=new Set(),timer=0,working=false,suspended=false,enabled=false,stopped=false;
+let revisions={},shadows={},dirty=new Set(),timer=0,working=false,suspended=false,enabled=false,stopped=false;
 try{revisions=JSON.parse(localStorage.getItem(REVISIONS)||"{}")||{};}catch(e){revisions={};}
+try{shadows=JSON.parse(localStorage.getItem(SHADOW)||"{}")||{};}catch(e){shadows={};}
+try{dirty=new Set(JSON.parse(localStorage.getItem(DRAFTS)||"[]").filter(x=>sections.includes(x)));}catch(e){dirty=new Set();}
 function token(){try{return sessionStorage.getItem(TOKEN)||""}catch(e){return ""}}
 function status(message,error){
   let p=document.getElementById("brz-sync-status");
@@ -36,7 +40,14 @@ async function request(action,data,secret){
   }
   return ans;
 }
-function storeRevisions(){suspended=true;try{localStorage.setItem(REVISIONS,JSON.stringify(revisions));}finally{suspended=false}}
+function saveMetadata(){
+  suspended=true;
+  try{
+    localStorage.setItem(REVISIONS,JSON.stringify(revisions));
+    localStorage.setItem(SHADOW,JSON.stringify(shadows));
+    localStorage.setItem(DRAFTS,JSON.stringify(Array.from(dirty)));
+  }finally{suspended=false;}
+}
 function hydrate(sectionsRemote){
   let changed=false;
   suspended=true;
@@ -50,15 +61,23 @@ function hydrate(sectionsRemote){
         const dest=STORE[section];
         const previous=localStorage.getItem(dest);
         const next=JSON.stringify(payload);
+        if(dirty.has(section) && previous!==next){
+          stopped=true;
+          status("Há edições locais pendentes em "+section+". Sem sobrescrever. Exporte o HTML antes de resolver.",true);
+          continue;
+        }
         if(previous!==next){
           if(previous){try{localStorage.setItem("brz_safra_backup_"+section+"_"+Date.now(),previous);}catch(e){}}
           localStorage.setItem(dest,next);
           changed=true;
         }
+        shadows[section]=next;
+      } else if (Object.keys(payload).length===0 && !dirty.has(section)){
+        shadows[section]=JSON.stringify(payload);
       }
       revisions[section]=rev;
     }
-    localStorage.setItem(REVISIONS,JSON.stringify(revisions));
+    saveMetadata();
   }finally{suspended=false;}
   return changed;
 }
@@ -87,6 +106,7 @@ function localData(section){
 function queue(section){
   if(!enabled||suspended||stopped||!token()||!sections.includes(section))return;
   dirty.add(section);
+  saveMetadata();
   status("BRZ Safras: alterações locais registradas; sincronizando…");
   clearTimeout(timer);timer=setTimeout(flush,700);
 }
@@ -98,13 +118,14 @@ async function flush(){
       const section=dirty.values().next().value;
       dirty.delete(section);
       const payload=localData(section);
-      if(!payload){continue;}
+      if(!payload){saveMetadata();continue;}
+      if(shadows[section]===JSON.stringify(payload)){saveMetadata();continue;}
       const rev=Number(revisions[section]);
       if(!Number.isSafeInteger(rev)||rev<1){dirty.add(section);throw new Error("Revisão da base não carregada. Faça login novamente.");}
       let ans;
       try{ans=await request("save",{section,payload,expected_revision:rev});}
-      catch(e){dirty.add(section);if(e.code==="conflict")stopped=true;throw e;}
-      revisions[section]=ans.revision;storeRevisions();
+      catch(e){dirty.add(section);saveMetadata();if(e.code==="conflict")stopped=true;throw e;}
+      revisions[section]=ans.revision;shadows[section]=JSON.stringify(payload);saveMetadata();
       status("BRZ Safras: "+section.replace(/_/g," ")+" sincronizado ✓");
     }
   }catch(e){
@@ -116,7 +137,7 @@ async function refresh(){
   try{
     const remote=await request("read");
     const changed=hydrate(remote.sections);
-    if(changed){status("Dados mais recentes encontrados; atualizando…");location.reload();}
+    if(changed && !stopped){status("Dados mais recentes encontrados; atualizando…");location.reload();}
   }catch(e){
     if(e.code==="unauthorized"){
       sessionStorage.removeItem(TOKEN);sessionStorage.removeItem("brz_safra_gate_open");
@@ -142,8 +163,8 @@ function start(){
     return;
   }
   status("BRZ Safras: sessão de edição ativa · banco conectado");
-  refresh();
-  window.addEventListener("focus",()=>{if(!document.hidden)refresh();});
+  if(dirty.size){flush();}else{refresh();}
+  window.addEventListener("focus",()=>{if(document.hidden)return;if(dirty.size&&!stopped)flush();else refresh();});
 }
 window.BRZSYNC={login,refresh,flush,status,version:"test-1"};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(start,0),{once:true});else setTimeout(start,0);
