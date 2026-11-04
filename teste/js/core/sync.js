@@ -8,9 +8,9 @@ const REVISIONS="brz_safra_remote_revisions_v1";
 const DRAFTS="brz_safra_pending_sections_v1";
 const SHADOW="brz_safra_last_synced_values_v1";
 const STORE={
-  safra_base:"brz_safra_dataC",
-  agrinvest_balance:"brz_safra_agrinvest_bal_v1",
-  scenario_assumptions:"brz_safra_cen_v1"
+  safra_base:"brz_safra_test_dataC",
+  agrinvest_balance:"brz_safra_test_agrinvest_bal_v1",
+  scenario_assumptions:"brz_safra_test_cen_v1"
 };
 const sections=Object.keys(STORE);
 let revisions={},shadows={},dirty=new Set(),timer=0,working=false,suspended=false,enabled=false,stopped=false;

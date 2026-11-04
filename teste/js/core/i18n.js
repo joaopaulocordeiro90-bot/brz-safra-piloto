@@ -405,7 +405,7 @@
     document.documentElement.lang=current;
     document.documentElement.dataset.lang=current;
     updateControls();
-    if(persist!==false){try{localStorage.setItem('brz_safra_language',current);}catch(e){}}
+    if(persist!==false){try{localStorage.setItem('brz_safra_test_language',current);}catch(e){}}
     try{if(typeof optStatus==='function')optStatus();}catch(e){}
     refreshCharts();
   }
@@ -559,7 +559,7 @@
     const b=e.target.closest('[data-lang]');if(b)applyLanguage(b.dataset.lang,true);
   });
   let initial=(window.__SAVED__&&window.__SAVED__.ui&&window.__SAVED__.ui.lang)||null;
-  if(!initial){try{initial=localStorage.getItem('brz_safra_language');}catch(e){}}
+  if(!initial){try{initial=localStorage.getItem('brz_safra_test_language');}catch(e){}}
   applyLanguage(initial===EN?EN:PT,false);
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',()=>applyLanguage(current,false),{once:true});

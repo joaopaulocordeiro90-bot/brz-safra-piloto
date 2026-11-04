@@ -888,8 +888,8 @@ function saveState(){
   window.__SAVED__=collectState();
   let ok=true;
   try{
-    localStorage.setItem('brz_safra_state',JSON.stringify(window.__SAVED__));
-    if(window._dataDirty)localStorage.setItem('brz_safra_dataC',JSON.stringify(C));
+    localStorage.setItem('brz_safra_test_state',JSON.stringify(window.__SAVED__));
+    if(window._dataDirty)localStorage.setItem('brz_safra_test_dataC',JSON.stringify(C));
   }catch(e){ok=false;toast('Aviso: não coube no navegador; use EXPORTAR HTML.');}
   optStatus();if(ok)toast('Edições salvas ✓');
 }
@@ -925,7 +925,7 @@ function exportarHTML(){
 }
 function limparTudo(){
   if(!confirm('Limpar edições salvas nesta máquina?'))return;
-  localStorage.removeItem('brz_safra_state');localStorage.removeItem('brz_safra_dataC');localStorage.removeItem('brz_safra_agrinvest_bal_v1');
+  localStorage.removeItem('brz_safra_test_state');localStorage.removeItem('brz_safra_test_dataC');localStorage.removeItem('brz_safra_test_agrinvest_bal_v1');
   window.__SAVED__=null;location.reload();
 }
 function rerenderAll(){
@@ -943,10 +943,10 @@ function rerenderAll(){
 function boot(){
   const stateOk=s=>!!(s&&s.v>=4&&s.build===BUILD&&s.dataAtual===C.meta.geradoEm);
   try{
-    const ls=localStorage.getItem('brz_safra_state');
+    const ls=localStorage.getItem('brz_safra_test_state');
     if(ls){const st=JSON.parse(ls);if(stateOk(st)&&(!stateOk(window.__SAVED__)||st.ts>window.__SAVED__.ts))window.__SAVED__=st;}
-    const dc=localStorage.getItem('brz_safra_dataC');
-    if(dc){const cc=JSON.parse(dc);if(cc&&cc.prog&&cc.meta&&cc.meta.geradoEm===C.meta.geradoEm&&cc.meta.revisoes===C.meta.revisoes){Object.assign(C.prog,cc.prog);Object.assign(C.hist,cc.hist);window._dataDirty=true;}else localStorage.removeItem('brz_safra_dataC');}
+    const dc=localStorage.getItem('brz_safra_test_dataC');
+    if(dc){const cc=JSON.parse(dc);if(cc&&cc.prog&&cc.meta&&cc.meta.geradoEm===C.meta.geradoEm&&cc.meta.revisoes===C.meta.revisoes){Object.assign(C.prog,cc.prog);Object.assign(C.hist,cc.hist);window._dataDirty=true;}else localStorage.removeItem('brz_safra_test_dataC');}
   }catch(e){}
   if(!stateOk(window.__SAVED__)){
     const old=window.__SAVED__;

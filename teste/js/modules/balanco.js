@@ -6,7 +6,7 @@
  'use strict';
  const official=window.__BAL_OFFICIAL__, root=document.getElementById('bal-root');
  if(!official||!root)return;
- const STORE='brz_safra_agrinvest_bal_v1';
+ const STORE='brz_safra_test_agrinvest_bal_v1';
  const colors={navy:'#1A3A5C',teal:'#0D9488',beige:'#B5963E',red:'#AF514D',grid:'#E6EDF2'};
  const rowsFor=product=> product==='Soja em grão' ? [
   ['group','Oferta / Supply'],['begin','Estoque inicial'],['production','Produção'],['imports','Importação'],['supply','OFERTA TOTAL'],
