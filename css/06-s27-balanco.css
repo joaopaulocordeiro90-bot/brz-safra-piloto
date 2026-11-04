@@ -1,0 +1,46 @@
+
+/* BRZ SAFRA s27 · Oferta & Demanda: leitura do balanço e estoques em lista */
+#scr-balanco .bal26-ch{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+#scr-balanco .bal26-png{min-height:30px;padding:5px 11px;flex:0 0 auto}
+#scr-balanco .bal26-read{margin:2px 0 14px;font:600 12.5px/1.5 var(--font);color:#21405A;background:#F4F8FB;border-left:3px solid #1A3A5C;border-radius:0 6px 6px 0;padding:9px 12px}
+#scr-balanco .bal26-sec{font:800 11.5px var(--font);color:#3F5A6E;margin:16px 0 8px}
+#scr-balanco .bal26-dest{display:grid;gap:7px}
+#scr-balanco .bal26-drow{display:grid;grid-template-columns:128px minmax(0,1fr) 64px;align-items:center;gap:10px;font:600 11px var(--font);color:#5A7184}
+#scr-balanco .bal26-drow.on{color:#173249;font-weight:800}
+#scr-balanco .bal26-drow b{text-align:right;font:800 11.5px var(--font);color:#173249}
+#scr-balanco .bal26-dbar{display:flex;height:22px;border-radius:4px;overflow:hidden;background:#EEF3F6}
+#scr-balanco .bal26-dbar i{display:flex;align-items:center;justify-content:center;height:100%;min-width:0}
+#scr-balanco .bal26-dbar i span{font:800 10px var(--font);color:#fff;white-space:nowrap}
+#scr-balanco .bal26-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:9px 0 2px 138px;font:600 10.5px var(--font);color:#4F677A}
+#scr-balanco .bal26-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+#scr-balanco .bal26-legend b{color:#173249}
+#scr-balanco .bal26-lu{color:#8296A6;font-weight:500}
+#scr-balanco .bal26-var{display:grid;gap:5px}
+#scr-balanco .bal26-vhead,#scr-balanco .bal26-vrow{display:grid;grid-template-columns:150px minmax(0,1fr) 64px 54px;align-items:center;gap:10px}
+#scr-balanco .bal26-vhead{font:700 10px var(--font);color:#7A8C9B;border-bottom:1px solid #E6EDF2;padding-bottom:5px}
+#scr-balanco .bal26-vhead span:nth-child(2){text-align:center}
+#scr-balanco .bal26-vhead span:nth-child(3),#scr-balanco .bal26-vhead span:nth-child(4){text-align:right}
+#scr-balanco .bal26-vrow{font:600 11px var(--font);color:#3B566B}
+#scr-balanco .bal26-vrow.tot{font-weight:800;color:#173249;border-top:1px solid #EEF2F5;padding-top:5px}
+#scr-balanco .bal26-vrow b{text-align:right;font:800 11.5px var(--font)}
+#scr-balanco .bal26-vrow small{text-align:right;font:600 10.5px var(--font);color:#6E8293}
+#scr-balanco .bal26-vtr{position:relative;display:block;height:11px;background:#EEF3F6;border-radius:2px}
+#scr-balanco .bal26-vtr em{position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:#9AABB8}
+#scr-balanco .bal26-vtr i{position:absolute;top:0;bottom:0;border-radius:2px}
+#scr-balanco .bal26-vtr i.u{background:#0D9488}#scr-balanco .bal26-vtr i.d{background:#B3564D}#scr-balanco .bal26-vtr i.f{background:#CBD5E1}
+#scr-balanco .bal26-hist{display:grid;gap:6px}
+#scr-balanco .bal26-hrow{display:grid;grid-template-columns:58px minmax(0,1fr) 46px 40px;align-items:center;gap:8px;font:600 11px var(--font);color:#4F677A}
+#scr-balanco .bal26-hrow b{text-align:right;font:800 11.5px var(--font);color:#26445C}
+#scr-balanco .bal26-hrow small{text-align:right;font:600 10.5px var(--font);color:#6E8293}
+#scr-balanco .bal26-hrow.on{color:#173249;font-weight:800}
+#scr-balanco .bal26-hrow.bal26-hh{font:700 9.5px var(--font);color:#8296A6;border-bottom:1px solid #E6EDF2;padding-bottom:4px}
+#scr-balanco .bal26-hrow.bal26-hh span:nth-child(3),#scr-balanco .bal26-hrow.bal26-hh span:nth-child(4){text-align:right}
+#scr-balanco .bal26-htr{display:block;height:10px;background:#EEF3F6;border-radius:2px;overflow:hidden}
+#scr-balanco .bal26-htr i{display:block;height:100%;background:#9DB3C5;border-radius:2px}
+#scr-balanco .bal26-hrow.on .bal26-htr i{background:#B5963E}
+@media(max-width:610px){
+ #scr-balanco .bal26-drow{grid-template-columns:86px minmax(0,1fr) 54px;gap:6px;font-size:10px}
+ #scr-balanco .bal26-legend{margin-left:0}
+ #scr-balanco .bal26-vhead,#scr-balanco .bal26-vrow{grid-template-columns:104px minmax(0,1fr) 52px 44px;gap:6px}
+ #scr-balanco .bal26-ch{flex-direction:column}
+}

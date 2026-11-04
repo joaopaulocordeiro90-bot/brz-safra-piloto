@@ -1,0 +1,16 @@
+
+/* BRZ SAFRA s31 · Ampliar (quadro de estimativas) */
+#q-zoom-bd{position:fixed;inset:0;background:rgba(12,27,43,.55);z-index:10000;display:none}
+#q-zoom-bd.on{display:block}
+body.q-zoom-open{overflow:hidden}
+.q26 .q-card.q-expanded{position:fixed!important;left:max(16px,3vw);right:max(16px,3vw);top:max(16px,4vh);bottom:max(16px,4vh);z-index:10001;overflow:auto;margin:0!important;max-width:none!important;width:auto!important;box-shadow:0 24px 64px rgba(10,25,41,.35);border-radius:12px;padding:22px 26px!important;background:#fff}
+.q26 .q-card.q-expanded .q-card-t{font-size:18px}
+.q26 .q-card.q-expanded .q-card-s{font-size:12.5px}
+.q26 .q-card.q-expanded .q-table th{font-size:12.5px;padding:9px 11px}
+.q26 .q-card.q-expanded .q-table td{font-size:14px;padding:9px 11px}
+.q26 .q-card.q-expanded .q-table td small,.q26 .q-card.q-expanded .q-table th small{font-size:11px}
+.q26 .q-card.q-expanded .q-reads{font-size:14px}
+.q26 .q-card.q-expanded .q-note{font-size:12px}
+.q26 .q-btn.q-zoom-btn{border-color:#1A3A5C;color:#1A3A5C}
+.q26 .q-card.q-expanded .q-btn.q-zoom-btn{background:#1A3A5C;color:#fff}
+@media(max-width:700px){.q26 .q-card.q-expanded{left:6px;right:6px;top:6px;bottom:6px;padding:14px!important}}

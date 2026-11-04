@@ -1,0 +1,74 @@
+
+/* BRZ SAFRA s30 · Indicadores */
+#ind-app{font-family:var(--font);color:#12293f;max-width:1180px;margin:10px auto 44px;font-variant-numeric:tabular-nums}
+#ind-app *{box-sizing:border-box}
+#ind-app .in-head{margin-top:6px}
+#ind-app .in-sub{font:400 11px/1.4 var(--font);color:#5A6F80;margin-top:3px}
+#ind-app .in-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 14px;padding-bottom:10px;border-bottom:1px solid #DCE6EE}
+#ind-app .in-tabs button{font:750 12px var(--font);border:1px solid #CBD9E4;background:#fff;color:#4B657A;border-radius:7px;padding:8px 16px;cursor:pointer}
+#ind-app .in-tabs button:hover{background:#EDF4F8}
+#ind-app .in-tabs button.on{background:#1A3A5C;border-color:#1A3A5C;color:#fff}
+#ind-app .in-ctl{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 10px}
+#ind-app .in-ctlbar{background:#fff;border:1px solid #DCE5ED;border-radius:10px;padding:10px 14px;margin-bottom:12px}
+#ind-app .in-ctl label{display:flex;align-items:center;gap:6px;font:700 11px var(--font);color:#475569}
+#ind-app .in-ctl select{font:700 11.5px var(--font);height:30px;border:1px solid #CFD9E3;border-radius:6px;background:#fff;color:#12293f;padding:3px 8px;cursor:pointer}
+#ind-app .in-hint{font:500 10.5px var(--font);color:#7A8C9B}
+#ind-app .in-card{background:#fff;border:1px solid #DCE5ED;border-radius:10px;box-shadow:0 3px 11px rgba(18,39,59,.048);padding:14px 16px;margin:0 0 14px}
+#ind-app .in-ch{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px}
+#ind-app .in-ch h3{margin:0;font:800 13.5px var(--font);color:#12293f}
+#ind-app .in-acts{display:flex;gap:6px;flex:0 0 auto}
+#ind-app .in-btn{font:700 11px var(--font);height:28px;padding:0 12px;border:1px solid #CFD9E3;border-radius:6px;background:#fff;color:#1A3A5C;cursor:pointer;white-space:nowrap}
+#ind-app .in-btn:hover{background:#F1F6F9}
+#ind-app .in-btn.in-pri{background:#0D9488;border-color:#0D9488;color:#fff}
+#ind-app .in-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:12px}
+#ind-app .in-kpi{background:#F4F8FB;border:1px solid #E2EAF0;border-radius:8px;padding:10px 12px;min-width:0}
+#ind-app .in-kpi span{display:block;font:700 10.5px var(--font);color:#5E7589}
+#ind-app .in-kpi b{display:block;font:800 19px/1.2 var(--font);color:#173249;margin:4px 0 2px;white-space:nowrap}
+#ind-app .in-kpi small{display:block;font:600 10px var(--font);color:#6E8293}
+#ind-app .in-text{font:500 13px/1.6 var(--font);color:#1E3448;background:#F7FAFC;border-left:3px solid #1A3A5C;border-radius:0 6px 6px 0;padding:11px 14px;margin:0 0 10px;user-select:text}
+#ind-app .in-lead{font-size:12px;border-left-color:#B5963E}
+#ind-app .in-scroll,#bal29-crush .in-scroll{overflow-x:auto}
+:is(#ind-app,#bal29-crush) .in-t{width:100%;border-collapse:collapse;font:500 11.5px var(--font);font-variant-numeric:tabular-nums}
+:is(#ind-app,#bal29-crush) .in-t th{background:#F1F5F9;color:#475569;font:700 10.5px/1.25 var(--font);padding:6px 8px;text-align:right;white-space:nowrap;border-bottom:1px solid #DFE7EE;vertical-align:bottom}
+:is(#ind-app,#bal29-crush) .in-t th small{display:block;font:400 9.5px var(--font);color:#64748B}
+:is(#ind-app,#bal29-crush) .in-t td{padding:6px 8px;text-align:right;border-bottom:1px solid #EDF1F5;white-space:nowrap;color:#1E3448}
+:is(#ind-app,#bal29-crush) .in-t .in-l{text-align:left}
+:is(#ind-app,#bal29-crush) .in-t td.in-l small{color:#7A8C9B;margin-left:4px}
+:is(#ind-app,#bal29-crush) .in-t tr.in-tot td{background:#F6F8FA;font-weight:700}
+:is(#ind-app,#bal29-crush) .in-up,:is(#ind-app,#bal29-crush) .in-t td.in-up{color:#0B7F74;font-weight:700}
+:is(#ind-app,#bal29-crush) .in-down,:is(#ind-app,#bal29-crush) .in-t td.in-down{color:#B3564D;font-weight:700}
+:is(#ind-app,#bal29-crush) .in-flat,:is(#ind-app,#bal29-crush) .in-t td.in-flat{color:#64748B}
+:is(#ind-app,#bal29-crush) .in-na,:is(#ind-app,#bal29-crush) .in-t td.in-na{color:#94A3B8}
+:is(#ind-app,#bal29-crush) .in-note{font:500 10px/1.45 var(--font);color:#6E8293;margin-top:8px}
+#ind-app .in-t tr.in-br td{background:#F8FAFC}
+#ind-app .in-click tbody tr{cursor:pointer}
+#ind-app .in-click tbody tr:hover td{background:#F3F8FA}
+#ind-app .in-click tbody tr.on td{background:#E8F5F2}
+#ind-app .in-c td,#ind-app .in-c th{text-align:center}
+#ind-app .in-c td small{color:#7A8C9B}
+#ind-app .in-heat{border-collapse:separate;border-spacing:2px;font:600 10.5px var(--font)}
+#ind-app .in-heat th{font:700 10px var(--font);color:#5E7589;padding:4px 6px;text-align:center;white-space:nowrap}
+#ind-app .in-heat td{text-align:center;padding:5px 2px;border-radius:3px;min-width:31px;color:#173249}
+#ind-app .in-heat th{padding:4px 2px}
+#ind-app .in-heat td.in-l,#ind-app .in-heat th.in-l{text-align:left;font-weight:800;min-width:70px;background:none}
+#ind-app .in-heat tr.in-br td.in-l{color:#1A3A5C}
+#ind-app .in-heat td.in-na{color:#B8C2CC;background:#FAFBFC}
+#ind-app .in-heat .in-last{font-weight:800;background:#F1F5F9}
+#ind-app .in-heat th small{display:block;font-weight:500}
+#ind-app .in-barh{width:120px}
+#ind-app .in-barc{padding-left:2px}
+#ind-app .in-bar{display:block;width:110px;height:9px;background:#EEF2F6;border-radius:2px;overflow:hidden}
+#ind-app .in-bar i{display:block;height:100%;background:#0D9488}
+#ind-app .in-empty{padding:22px;text-align:center;color:#94A3B8;font:500 11px var(--font)}
+#ind-app .in-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#ind-app .in-two h4{margin:0 0 6px;font:800 11.5px var(--font);color:#3F5A6E}
+#ind-app .in-chart{height:300px;position:relative;margin-top:8px}
+#ind-app .in-chart.in-tall{height:330px}
+#ind-app .in-seg{display:inline-flex;border:1px solid #CFD9E3;border-radius:6px;overflow:hidden}
+#ind-app .in-seg button{font:700 11px var(--font);border:0;background:#fff;color:#475569;padding:6px 11px;cursor:pointer}
+#ind-app .in-seg button+button{border-left:1px solid #CFD9E3}
+#ind-app .in-seg button.on{background:#1A3A5C;color:#fff}
+#ind-app svg.in-spark{width:80px!important;height:20px!important;display:inline-block;vertical-align:middle;background:transparent}
+#ind-app .in-spc{text-align:center}
+@media(max-width:900px){#ind-app .in-two{grid-template-columns:1fr}}
+@media(max-width:600px){#ind-app .in-ch{flex-direction:column}#ind-app .in-chart{height:250px}#ind-app .in-text{font-size:12px}}
