@@ -1,9 +1,0 @@
-{
-  "name": "brz-safras",
-  "compatibility_date": "2026-11-04",
-  "assets": {
-    "directory": "./dist"
-  },
-  "workers_dev": false,
-  "preview_urls": false
-}
