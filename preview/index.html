@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1A3A5C">
+<title>BRZ · Safras Brasil | Prévia de acesso</title>
+<style>
+:root{--navy:#1A3A5C;--navy2:#12293f;--teal:#0D9488;--bege:#B5963E;--line:#DCE5ED;--text:#1E3448;--muted:#64748B;--canvas:#F3F6F9;--font:'Arial Nova Cond','Arial Nova Condensed','Arial Narrow',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+body{font-family:var(--font);background:var(--canvas);color:var(--text);font-variant-numeric:tabular-nums}
+header{height:66px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,4vw,58px)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{font-weight:900;color:var(--navy);font-size:30px;letter-spacing:-2px;line-height:1}
+.brand-divider{width:1px;height:30px;background:#CAD6E0}
+.brand-copy strong{display:block;font-size:12px;color:var(--navy);letter-spacing:.2px}
+.brand-copy span{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.header-tag{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1.1px}
+main{min-height:calc(100vh - 66px);padding:40px 18px 65px;display:flex;align-items:center;justify-content:center}
+.card{background:#fff;width:min(100%,440px);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 34px rgba(18,41,63,.08);overflow:hidden}
+.accent{height:4px;background:linear-gradient(90deg,var(--navy) 0 70%,var(--teal) 70% 92%,var(--bege) 92%)}
+.inner{padding:36px clamp(24px,5vw,40px) 30px}
+.eyebrow{text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);font-size:10px;font-weight:800;margin:0 0 11px}
+h1{font-size:24px;line-height:1.2;letter-spacing:-.45px;color:var(--navy2);margin:0 0 10px}
+.sub{margin:0 0 28px;color:#526778;font-size:12.5px;line-height:1.5}
+label{display:block;font-size:12px;font-weight:800;color:var(--navy2);margin-bottom:9px}
+.field-wrap{position:relative}
+input{width:100%;height:45px;background:#fff;border:1px solid #C9D6DF;border-radius:6px;padding:0 47px 0 13px;font:600 16px var(--font);color:var(--navy2);letter-spacing:1px;outline:0;transition:border-color .15s,box-shadow .15s}
+input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.11)}
+.toggle{position:absolute;right:1px;top:1px;height:43px;padding:0 12px;background:none;color:#566D7F;font-size:11px;font-weight:700;border:0;cursor:pointer}
+button.submit{width:100%;height:44px;border:0;background:var(--navy);color:#fff;border-radius:6px;font:800 12px var(--font);letter-spacing:.2px;margin-top:18px;cursor:pointer}
+button.submit:hover,button.submit:focus-visible{background:#24547c}
+button.submit:disabled{opacity:.55;cursor:wait}
+.error{margin:9px 0 0;font-size:12px;color:#B42318;min-height:16px}
+.line{border-top:1px solid #E8EEF2;padding:16px 40px;background:#FBFCFD;text-align:center}
+.line small{font-size:10px;color:#64748B}
+.preview-note{position:fixed;bottom:13px;left:0;right:0;text-align:center;font-size:10px;color:#7F91A1}
+@media(max-width:520px){header{height:61px;padding:0 16px}.header-tag{display:none}main{align-items:flex-start;padding-top:65px}.inner{padding-top:30px}.line{padding:14px}.preview-note{position:static;margin:-25px auto 14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <div class="brand-logo">BRZ</div><div class="brand-divider"></div>
+    <div class="brand-copy"><strong>Safras Brasil</strong><span>Progresso de Safra · Conab</span></div>
+  </div>
+  <span class="header-tag">AGRINVEST INTELIGÊNCIA</span>
+</header>
+<main>
+<section class="card" aria-labelledby="title">
+<div class="accent"></div>
+<div class="inner">
+  <p class="eyebrow">Ambiente BRZ · Safras</p>
+  <h1 id="title">Acesso ao painel</h1>
+  <p class="sub">Informe sua senha para acessar o BRZ Safras Brasil.</p>
+  <form id="login" autocomplete="off">
+  <label for="senha">Senha de acesso</label>
+  <div class="field-wrap"><input id="senha" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Digite sua senha" required autofocus><button class="toggle" id="show" type="button" aria-label="Exibir senha">Mostrar</button></div>
+  <p class="error" role="status" aria-live="polite" id="msg"></p>
+  <button class="submit" type="submit">Entrar no BRZ Safras</button>
+  </form>
+</div>
+<div class="line"><small>AGRINVEST COMMODITIES · BRASIL</small></div>
+</section>
+</main>
+<div class="preview-note">Prévia visual · O painel oficial não foi modificado</div>
+<script>
+(function(){
+'use strict';
+const form=document.getElementById('login'),field=document.getElementById('senha'),status=document.getElementById('msg'),show=document.getElementById('show');
+const hash='409a0bc78b15efab11d17d3052d220cb35ec30a5592fef34511cb98f26cb7ca0';
+show.addEventListener('click',()=>{const visible=field.type==='text';field.type=visible?'password':'text';show.textContent=visible?'Mostrar':'Ocultar';show.setAttribute('aria-label',visible?'Exibir senha':'Ocultar senha');field.focus();});
+form.addEventListener('submit',async e=>{
+e.preventDefault();status.textContent='';
+if(!crypto?.subtle){status.textContent='Abra esta prévia pelo endereço HTTPS.';return;}
+try{
+const raw=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(field.value));
+const d=Array.from(new Uint8Array(raw),b=>b.toString(16).padStart(2,'0')).join('');
+if(d!==hash){status.textContent='Senha incorreta. Tente novamente.';field.value='';field.focus();return;}
+status.style.color='#0D7E73';status.textContent='Acesso confirmado. Abrindo o painel…';
+setTimeout(()=>window.location.assign('../'),350);
+}catch(err){status.textContent='Não foi possível validar a senha.';}
+});
+})();
+</script>
+</body>
+</html>
