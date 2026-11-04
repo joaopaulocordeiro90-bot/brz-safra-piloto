@@ -1,0 +1,28 @@
+
+/* BRZ SAFRA s28 · modo dinâmico nativo */
+.ndyn{position:relative;display:flex;flex-direction:column;height:100%;min-height:0;font-family:var(--font)}
+.ndyn-top{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin:0 0 2px}
+.ndyn-leg{display:flex;flex-wrap:wrap;gap:3px 4px;min-width:0}
+.ndyn-leg button{font:600 8.5px var(--font);border:1px solid #E2E8F0;border-radius:9px;background:#fff;color:#000;padding:0 6px;height:15px;display:inline-flex;align-items:center;gap:3px;cursor:pointer;white-space:nowrap}
+.ndyn-leg button i{width:8px;height:8px;border-radius:2px;display:inline-block}
+.ndyn-leg button.off{opacity:.38;text-decoration:line-through}
+.ndyn-tools{display:flex;gap:3px;flex:0 0 auto}
+.ndyn-tools button{font:700 8.5px var(--font);height:15px;min-width:16px;padding:0 4px;border:1px solid #CBD5E1;border-radius:4px;background:#fff;color:#334155;cursor:pointer;line-height:1}
+.ndyn-tools button:hover:not(:disabled){background:#F1F5F9}
+.ndyn-tools button.on{background:#0D9488;border-color:#0D9488;color:#fff}
+.ndyn-tools button:disabled{opacity:.4;cursor:default}
+.ndyn-svg{flex:1;min-height:0;position:relative}
+.ndyn-svg svg{width:100%;height:100%;display:block;user-select:none;background:#fff}
+.ndyn-view{position:absolute;left:0;right:0;top:20px;bottom:0;background:#fff;border:1px solid #DCE5ED;border-radius:6px;overflow:auto;z-index:5;font:500 10px var(--font);color:#1E3448;box-shadow:0 6px 18px rgba(15,38,56,.12)}
+.ndyn-vh{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-bottom:1px solid #E6EDF2;position:sticky;top:0;background:#fff}
+.ndyn-vh button{border:0;background:none;cursor:pointer;font-size:12px;color:#475569}
+.ndyn-view table{border-collapse:collapse;width:100%}
+.ndyn-view th,.ndyn-view td{padding:3px 7px;border-bottom:1px solid #EEF2F5;text-align:right;white-space:nowrap}
+.ndyn-view th{background:#F1F5F9;font-weight:700}
+.ndyn-view th:first-child,.ndyn-view td:first-child{text-align:left}
+.ndyn.big .ndyn-leg button{font-size:11px;height:22px;padding:0 9px;border-radius:11px}
+.ndyn.big .ndyn-leg button i{width:10px;height:10px}
+.ndyn.big .ndyn-tools button{font-size:11px;height:22px;min-width:24px;padding:0 8px}
+.ndyn.big .ndyn-view{top:28px;font-size:12px}
+#dyntip{z-index:400}
+#dyntip .row{display:flex;align-items:center;gap:4px;white-space:nowrap}

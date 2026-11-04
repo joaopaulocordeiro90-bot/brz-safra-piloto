@@ -1,0 +1,34 @@
+
+/* BRZ SAFRA s29 · IMEA · MT e Base em Excel */
+#imea-app{font-family:var(--font);color:#1A3A5C;max-width:1140px;margin:12px auto 44px}
+#imea-app *{box-sizing:border-box}
+#imea-app .im-acts{display:flex;gap:8px;flex-wrap:wrap}
+#imea-app .dr-export.im-ghost{background:#fff;color:#1A3A5C}
+#imea-app .im-kpis .dr-kpi small{display:block;font-size:10.5px;color:#64748B;margin-top:5px;line-height:1.35}
+#imea-app .im-chartpane{margin-bottom:14px}
+#imea-app .im-chart{height:300px;position:relative}
+#imea-app .dr-table.im-table{min-width:0}
+#imea-app .im-scroll{max-height:none}
+#imea-app .im-table td,#imea-app .im-table th{text-align:right}
+#imea-app .im-table td:first-child,#imea-app .im-table th:first-child{text-align:left}
+#imea-app .im-up{color:#0B7F74}#imea-app .im-down{color:#B3564D}#imea-app .im-flat{color:#64748B}
+#imea-app .im-na{color:#94A3B8}
+#imea-app .im-table td.im-note{text-align:left;white-space:normal;color:#5A6F80;min-width:110px}
+#imea-app .im-table th.im-noteh{text-align:left}
+#imea-app .im-proj th{white-space:normal;line-height:1.25;vertical-align:bottom}
+#imea-app .im-proj td{padding-left:5px;padding-right:5px}
+#imea-app .im-bar{display:inline-block;width:70px;height:8px;background:#EEF2F6;border-radius:2px;margin-right:8px;vertical-align:middle;overflow:hidden}
+#imea-app .im-bar i{display:block;height:100%;background:#0D9488}
+#imea-app .im-fontes{margin:6px 0 0 16px;padding:0;columns:2;font-size:10.5px;line-height:1.5}
+#imea-app .im-fontes a{color:#185B7C}
+#imea-app .dr-cols{margin-bottom:14px}
+#pane-imea .im-edgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#pane-imea .im-ed{background:#fff;border:1px solid var(--g200);border-radius:8px;padding:10px;min-width:0}
+#pane-imea .im-edh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font:800 12px var(--font);color:var(--navy)}
+#pane-imea .im-edh button{font:600 11px var(--font);border:1px solid var(--line-strong);background:#fff;border-radius:6px;padding:4px 10px;cursor:pointer}
+#pane-imea .dbwrap.im-edwrap{max-height:340px;border-radius:8px}
+#pane-imea .im-lab{font:600 11px var(--font);color:var(--g600);display:flex;align-items:center;gap:5px}
+#pane-imea .im-lab input{font:600 11px var(--font);border:1px solid var(--line-strong);border-radius:6px;padding:4px 7px;width:100px}
+.sect-h .base-xlsx{margin-left:auto;font:700 11.5px var(--font);border:1px solid #0D9488;background:#0D9488;color:#fff;border-radius:6px;padding:6px 14px;cursor:pointer;white-space:nowrap}
+.sect-h .base-xlsx:disabled{opacity:.6;cursor:wait}
+@media(max-width:900px){#pane-imea .im-edgrid{grid-template-columns:1fr}#imea-app .im-fontes{columns:1}}

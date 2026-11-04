@@ -1,0 +1,5 @@
+
+/* BRZ SAFRA s28 · tela inicial: 11 seções na ordem da barra do topo; Base em largura total */
+.pgrid .newscard.wide{grid-column:1/-1;height:220px}
+.pgrid .newscard.gen{background-size:cover;background-position:center}
+@media(max-width:720px){.pgrid .newscard.wide{height:200px}}
